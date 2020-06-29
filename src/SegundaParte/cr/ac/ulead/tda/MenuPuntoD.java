@@ -1,45 +1,44 @@
 package SegundaParte.cr.ac.ulead.tda;
 
+import InterfazUsuario.Ayudadores;
+
 import java.util.Scanner;
 
 public class MenuPuntoD {
     ClaseEjecutableSegundaPartePuntoD D = new ClaseEjecutableSegundaPartePuntoD();
-        Scanner input = new Scanner(System.in);
-        public void menu() {
-            System.out.println("------------------------------------------------");
-            System.out.println("Ingrese la opcion que desea realizar: ");
-            System.out.println("1. Ingresar datos de Mascota a la cola");
-            System.out.println("2. Ingresar datos de Persona a la cola");
-            System.out.println("3. Eliminar datos de la cola");
-            System.out.println("4. Salir");
-            System.out.println("-------------------------------------------------");
-            int option = input.nextInt();
+    Scanner input = new Scanner(System.in);
 
+    public void menu3() throws Exception {
+        Ayudadores ayuda = new Ayudadores();
+        int i = 0;
+        while (i < 50) {
+            ayuda.menu3();
+            int option = input.nextInt();
             switch (option) {
                 case 1:
-                    D.insertarMascota();
-                    menu();
+                    D.ingresarCola(ayuda.llenar_InformacionMascota());
+                    i++;
                     break;
                 case 2:
-                    D.insertarPersona();
-                    menu();
+                    D.ingresarCola(ayuda.llenar_InformacionPersona());
+                    i++;
                     break;
                 case 3:
-                    D.extraerPerson();
-                    D.extraerPet();
-                    menu();
+
+                    System.out.println(D.eliminarCola().SerializadorXML());
                     break;
                 case 4:
                     System.out.println("Ha salido :(");
+                    i = 51;
                     break;
 
                 default:
                     System.out.println("Opcion desconocida");
-                    menu();
+
 
             }
 
         }
     }
-
+}
 

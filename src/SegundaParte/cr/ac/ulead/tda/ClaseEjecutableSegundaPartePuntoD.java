@@ -2,136 +2,63 @@ package SegundaParte.cr.ac.ulead.tda;
 
 import Info_mascota.Mascota;
 import Info_persona.Persona;
+import Serializador.SerializadorUlead;
+
 import java.util.Scanner;
 
 public class ClaseEjecutableSegundaPartePuntoD {
     Scanner input = new Scanner(System.in);
-    public static Mascota pet[] = new Mascota[50];
-    public static Persona person[] = new Persona[50];
-    int inicio;
-    int fin;
-    int[] cola;
-    boolean extraido;
-    boolean insertado;
+    private SerializadorUlead  serializador[] = new SerializadorUlead[50];
+    int inicio=-1;
+    int fin=-1;
     int max = 50;
-    static int contador = 0;
 
-    ClaseEjecutableSegundaPartePuntoD() {
-        cola = new int[50];
-        inicio = 0;
-        fin = inicio;
-        extraido = true;
-        insertado = false;
-        int max = 50;
-    }
 
-    public void insertarMascota() {
-        if (llenaPet()) {
-            System.out.println("ERROR: COLA LLENA");
-
-        } else {
-            System.out.println("Ingrese la siguiente informacion: ");
-            inicio = 0;
-            pet[contador] = new Mascota(info_pet(), info_pet(), info_pet());
-            System.out.println(pet[contador].SerializadorJson());
-            contador++;
-        }
-    }
-
-    public void insertarPersona() {
-        if (llenaPerson()) {
-            System.out.println("ERROR: COLA LLENA");
-
-        } else {
-            System.out.println("Ingrese la siguiente informacion: ");
-            inicio = 0;
-            person[contador] = new Persona(info_person(), info_person(), info_person(), info_person(), info_person());
-            System.out.println(person[contador].SerializadorJson());
-            contador++;
-        }
-    }
-
-    private boolean llenaPet() {
-        if (pet[50 - 1] != null) {
+    private boolean colaLlena() {
+        if (inicio == 0 && fin == this.max - 1) {
             return true;
-        } else {
-            return false;
-
         }
-    }
-
-    private boolean llenaPerson() {
-        if (pet[50 - 1] != null) {
+        if (inicio == fin + 1) {
             return true;
-        } else {
-            return false;
-
         }
+        return false;
     }
 
-    private String info_pet() {
-        String[] info_mascota = {"Nombre : ", "Tipo de Animal : ", "Edad : "};
-        System.out.println(info_mascota[inicio]);
-        inicio++;
-        return input.nextLine();
-    }
-
-    private String info_person() {
-        String[] info_persona = {"Nombre: ", "Apellido: ", "Fecha de nacimiento: ", "Peso: ", "Estatura: "};
-        System.out.println(info_persona[inicio]);
-        inicio++;
-        return input.nextLine();
-    }
-
-
-    public boolean vaciaPet() {
-        if (pet[0] == null) {
+    public boolean colaVacia() {
+        if (fin == -1) {
             return true;
         } else {
             return false;
         }
     }
-    public boolean vaciaPerson() {
-        if (person[0] == null) {
-            return true;
+
+    public void ingresarCola(SerializadorUlead newSerializadorUlead) throws Exception  {
+        if (colaLlena()) {
+            throw new Exception("La cola esta llena \n");
         } else {
-            return false;
-        }
-    }
-    public int extraerPet() {
-        if (!vaciaPet()) {
-            extraido = true;
-            insertado = false;
-            if (inicio == cola.length - 1) {
+            if (inicio == -1)
                 inicio = 0;
-                return cola[cola.length - 1];
-            } else {
-                inicio++;
-                return cola[inicio - 1];
-            }
-        } else {
-            System.out.println("ERROR: COLA VACIA");
+            fin = (fin + 1) % this.max;
+            serializador[fin] = newSerializadorUlead;
 
-            return 0;
+
         }
     }
-    public int extraerPerson() {
-        if (!vaciaPerson() ) {
-            extraido = true;
-            insertado = false;
-            if (inicio == cola.length - 1) {
-                inicio = 0;
-                return cola[cola.length - 1];
-            } else {
-                inicio++;
-                return cola[inicio - 1];
-            }
+    public SerializadorUlead eliminarCola() throws Exception {
+        SerializadorUlead elminador_serializador;
+        if (colaVacia()) {
+            throw new Exception("La cola esta vacia, ingrese datos por favor\n");
         } else {
-            System.out.println("ERROR: COLA VACIA");
-
-            return 0;
+            elminador_serializador = serializador[inicio];
+            if (inicio == fin) {
+                inicio = -1;
+                inicio = -1;
+            } else {
+                inicio = (inicio + 1) % this.max;
+            }
+            return elminador_serializador;
         }
+    }
     }
 
 
-}

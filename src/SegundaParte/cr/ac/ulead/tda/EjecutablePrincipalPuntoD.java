@@ -1,9 +1,9 @@
 package SegundaParte.cr.ac.ulead.tda;
 
 public class EjecutablePrincipalPuntoD {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         MenuPuntoD menu = new MenuPuntoD();
-        menu.menu();
+        menu.menu3();
     }
 
 }

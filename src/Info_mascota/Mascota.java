@@ -7,11 +7,6 @@ public class Mascota implements SerializadorUlead {
     private String TipoAnimal;
     private String Edad;
 
-    public Mascota(String nombre , String tipoAnimal, String edad) {
-      Nombre = nombre;
-       TipoAnimal = tipoAnimal;
-        Edad = edad;
-    }
 
     public String getNombre() {
         return Nombre;
@@ -40,10 +35,12 @@ public class Mascota implements SerializadorUlead {
 
     @Override
     public  String SerializadorXML() {
-        return "<?xml version= 1.0 " + "\n" + "<Nombre>"+ Nombre +"</Nombre>" + "\n<TipoAnimal>" + TipoAnimal +"</Tipo de Animal>" + "\n<Edad>" + Edad +"</Edad>";
+        return "<?xml version= 1.0 "+ "\n <Mascota> "+ "\n" + "<Nombre>"+ getNombre() +"</Nombre>" + "\n<TipoAnimal>" + getTipoAnimal() +"</Tipo de Animal>" + "\n<Edad>" + getEdad() +"</Edad>"+"\n <Mascota>";
     }
 
+    @Override
     public  String SerializadorJson() {
-        return "Nombre: "+Nombre + "\n Tipo de animal: "+TipoAnimal  + "\n Edad: "+Edad;
+        return "{Nombre: "+ getNombre() + "\n Tipo de animal: "+ getTipoAnimal()
+                + "\n Edad: "+ getEdad()+ "}";
     }
 }

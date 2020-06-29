@@ -6,23 +6,16 @@ import java.util.Scanner;
 
 public class ClaseEjecutableSeguntaPartePuntoA {
     Scanner input = new Scanner(System.in);
-    static int contador = 0;
+    int contador = 0;
     int inicio;
     int max = 50;
+    int tope = 0;
     public static Persona person[] = new Persona[50];
 
-    public void IngresarPila() {
-        if (PilaLlena()) {
-            System.out.println("La pila esta llena");
-        } else {
-            System.out.println("Ingrese la siguiente informacion: ");
-            inicio = 0;
+    public void IngresarPila(Persona newPersona) {
+        person[tope] = newPersona;
+        tope++;
 
-            person[contador] = new Persona(info_person(), info_person(), info_person(), info_person(), info_person());
-
-            System.out.println(person[contador].SerializadorJson());
-            contador++;
-        }
     }
 
     private boolean PilaLlena() {
@@ -33,27 +26,6 @@ public class ClaseEjecutableSeguntaPartePuntoA {
         }
     }
 
-    private String info_person() {
-        String[] info_persona = {"Nombre: ", "Apellido: ", "Fecha de nacimiento: ", "Peso: ", "Estatura: "};
-        System.out.println(info_persona[inicio]);
-        inicio++;
-
-        return input.nextLine();
-    }
-
-    public void VerPila() {
-        if (PilaVacia()) {
-            System.out.println("La pila esta vacia, no hay elementos que mostrar");
-        } else {
-            for (int i = max - 1; i >= 0; i--) {
-                if (person[i] != null) {
-                    System.out.println(person[i].SerializadorJson());
-
-                }
-
-            }
-        }
-    }
 
     private boolean PilaVacia() {
         if (person[0] == null) {
@@ -63,20 +35,17 @@ public class ClaseEjecutableSeguntaPartePuntoA {
         }
     }
 
-    public void EliminarElemento() {
+    public String  EliminarElemento() throws Exception {
         if (PilaVacia()) {
-            System.out.println("La pila esta vacia");
+            throw new Exception ("La cola esta vacia, ingrese datos por favor");
         } else {
-            contador--;
-            person[contador] = null;
+            tope--;
+            return person[tope].SerializadorJson();
 
 
-                 System.out.println("Ha sido eliminado");
-             }
-
-
-            }
         }
+    }
+}
 
 
 

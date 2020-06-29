@@ -8,14 +8,6 @@ public class Persona implements SerializadorUlead {
     private String Peso;
     private String Estatura;
 
-    public Persona(String nombre, String apellido, String fechaNacimiento, String peso, String estatura) {
-        Nombre = nombre;
-        Apellido = apellido;
-        FechaNacimiento = fechaNacimiento;
-        Peso = peso;
-        Estatura = estatura;
-    }
-
 
 
     public String getNombre() {
@@ -60,11 +52,12 @@ public class Persona implements SerializadorUlead {
 
     @Override
     public String SerializadorXML() {
-        return "<?xml version= 1.0 " + "\n" + "<Nombre>" + Nombre +"</Nombre>"  +  "\n <Apellido>" +  Apellido  +"</Apellido>"+ "\n<Fecha de nacimiento>" + FechaNacimiento +"</Fecha de nacimiento>"+ "\n<Peso>" + Peso +"</Peso>"+ "\n<Estatura >" + Estatura +"</Estructras>";
+        return "<?xml version= 1.0 " + "\n" + "<Persona> \n" +  "<Nombre>" + getNombre() +"</Nombre>"   +  "\n <Apellido>" +  getApellido() +"</Apellido>"+ "\n <Fecha de nacimiento>" + getEstatura() +"</Fecha de nacimiento>"+ "\n <Peso>" + getPeso() +"</Peso>"+ "\n <Estatura >" + getEstatura() +"</Estructras> " + "\n </Persona>";
     }
 
+    @Override
     public  String SerializadorJson() {
-        return "{\n" + "Nombre: "+Nombre + "\n Apellido: "+Apellido + "\n Fecha de nacimiento: "+FechaNacimiento+ "\n Peso: "+Peso + "\n Estatura: "+Estatura+ "\n}";
+        return "{\n" + "Nombre: "+ getNombre()  + "\n Apellido: " + getApellido() + "\n Fecha de nacimiento: "+ getFechaNacimiento() + "\n Peso: "+getPeso() + "\n Estatura: "+ getEstatura() + "\n}";
 
     }
 }
